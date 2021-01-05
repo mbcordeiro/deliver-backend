@@ -27,9 +27,7 @@ public class Order implements Serializable {
     @JoinTable(name = "tb_order_product", joinColumns = @JoinColumn(name = "order_id"), inverseJoinColumns = @JoinColumn(name = "product_id"))
     private Set<Product> products = new HashSet<>();
 
-    public Order() {
-
-    }
+    public Order() { }
 
     public Order(Long id, String address, Double latitude, Double longitude, Instant moment, OrderStatus status) {
         this.id = id;

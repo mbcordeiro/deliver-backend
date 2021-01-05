@@ -1,30 +1,34 @@
-package com.matheuscordeiro.deliver.entities;
+package com.matheuscordeiro.deliver.dto;
 
-import javax.persistence.*;
+import com.matheuscordeiro.deliver.entities.Product;
+
 import java.io.Serializable;
-import java.util.Objects;
 
-@Entity
-@Table(name = "tb_product")
-public class Product implements Serializable {
+public class ProductDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Double price;
     private String description;
     private String imageUrl;
 
-    public Product () { }
+    public ProductDTO() { }
 
-    public Product(Long id, String name, Double price, String description, String imageUrl) {
+    public ProductDTO(Long id, String name, Double price, String description, String imageUrl) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.imageUrl = imageUrl;
+    }
+
+    public ProductDTO(Product entity) {
+        id = entity.getId();
+        name = entity.getName();
+        price = entity.getPrice();
+        description = entity.getDescription();
+        imageUrl = entity.getImageUrl();
     }
 
     public Long getId() {
@@ -65,18 +69,5 @@ public class Product implements Serializable {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return id.equals(product.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 }
